@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">listaPreciosAlgunLugar</string>
+    <string name="title_activity_busquedas">busquedasActivity</string>
+    <string name="title_home">Escanear Codigo</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="consultar_precio">consultar precio</string>
+    <string name="text_btn_escanear">escanear</string>
+    <string name="text_btn_nueva_vta">nueva venta</string>
+    <string name="total_vta">$ 999.99</string>
+</resources>
