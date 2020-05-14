@@ -23,7 +23,7 @@
             android:paddingRight="32dp"
             android:text="@string/text_btn_escanear"
             android:textColor="@color/primaryTextColor"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescripcion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
             tools:layout_conversion_absoluteWidth="379dp"></Button>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtDescripcion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -55,9 +55,9 @@
             android:textColor="@color/primaryTextColor"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="@+id/txtDescripcion"
+            app:layout_constraintStart_toStartOf="@+id/txtDescripcion"
+            app:layout_constraintTop_toBottomOf="@+id/txtDescripcion"
             tools:layout_conversion_absoluteHeight="19dp"
             tools:layout_conversion_absoluteWidth="41dp">
 
