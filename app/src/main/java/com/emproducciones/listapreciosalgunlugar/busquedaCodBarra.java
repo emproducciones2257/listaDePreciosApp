@@ -1,21 +1,18 @@
 package com.emproducciones.listapreciosalgunlugar;
 
 import androidx.lifecycle.ViewModelProviders;
-
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -23,8 +20,9 @@ public class busquedaCodBarra extends Fragment {
 
     private BusquedaCodBarraViewModel mViewModel;
     private TextView textView;
-
     private Button btn;
+    private FirebaseFirestore db;
+    private String descri, precio;
 
     public static busquedaCodBarra newInstance() {
         return new busquedaCodBarra();
@@ -33,19 +31,21 @@ public class busquedaCodBarra extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        db = FirebaseFirestore.getInstance();
         View view = inflater.inflate(R.layout.busqueda_cod_barra_fragment, container, false);
+
+        initView(view);
+        btn.setOnClickListener(view1 ->
+                IntentIntegrator.forSupportFragment(busquedaCodBarra.this)
+                .setOrientationLocked(false)
+                .initiateScan());
+
+        return view;
+    }
+
+    private void initView(View view) {
         btn=view.findViewById(R.id.btnScan);
         textView = view.findViewById(R.id.txtDescripcion);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(),"Touch",Toast.LENGTH_LONG).show();
-                IntentIntegrator.forSupportFragment(busquedaCodBarra.this)
-                        .setOrientationLocked(false)
-                        .initiateScan();
-            }
-        });
-        return view;
     }
 
     @Override
@@ -63,10 +63,13 @@ public class busquedaCodBarra extends Fragment {
             if(result.getContents() == null) {
                 textView.setText("Nulo che");
             } else {
-                textView.setText(result.getContents());
+                obtenerDtosDB(result.getContents());
+                textView.setText(descri);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+    private void obtenerDtosDB(String contents) {
     }
 }
