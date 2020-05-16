@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.emproducciones.listapreciosalgunlugar.model.producto;
+import com.emproducciones.listapreciosalgunlugar.viewModel.vMProducto;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -21,20 +23,25 @@ public class busquedaCodBarra extends Fragment {
     private BusquedaCodBarraViewModel mViewModel;
     private TextView textView;
     private Button btn;
-    private FirebaseFirestore db;
     private String descri, precio;
+    private int codMar,codPro;
+    private vMProducto vMProducto;
+    private producto produ;
 
-    public static busquedaCodBarra newInstance() {
-        return new busquedaCodBarra();
+    public busquedaCodBarra() {
+
+        vMProducto = new vMProducto();
+        produ = null;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        db = FirebaseFirestore.getInstance();
+
         View view = inflater.inflate(R.layout.busqueda_cod_barra_fragment, container, false);
 
         initView(view);
+
         btn.setOnClickListener(view1 ->
                 IntentIntegrator.forSupportFragment(busquedaCodBarra.this)
                 .setOrientationLocked(false)
@@ -64,12 +71,24 @@ public class busquedaCodBarra extends Fragment {
                 textView.setText("Nulo che");
             } else {
                 obtenerDtosDB(result.getContents());
-                textView.setText(descri);
+                if (produ!=null)
+                    textView.setText(produ.getDtosExtras());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
     private void obtenerDtosDB(String contents) {
+        procesarCB(contents);
+        produ = vMProducto.getProducto(codMar,codPro);
+
+    }
+
+    private void procesarCB(String contents) {
+
+        codMar = Integer.parseInt(contents.substring(3,8));
+        codPro = Integer.parseInt(contents.substring(8,12));
     }
 }
