@@ -1,7 +1,9 @@
 package com.emproducciones.listapreciosalgunlugar.viewModel;
 
 import com.emproducciones.listapreciosalgunlugar.Repositorio.consultaRepository;
+import com.emproducciones.listapreciosalgunlugar.model.proPreCloud;
 import com.emproducciones.listapreciosalgunlugar.model.producto;
+
 
 public class vMProducto {
 
@@ -11,5 +13,5 @@ public class vMProducto {
         cRepo = new consultaRepository();
     }
 
-    public producto getProducto(int codMar, int codProdu){return cRepo.obtenerProducto(codMar,codProdu);}
+    public proPreCloud getProducto(int codMar, int codProdu){return cRepo.obtenerProducto(codMar,codProdu);}
 }

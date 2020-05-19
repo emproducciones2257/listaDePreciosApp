@@ -14,6 +14,7 @@ public class producto {
     public producto() {
     }
 
+
     public int getIdProducto() {
         return idProducto;
     }
@@ -62,4 +63,15 @@ public class producto {
         this.codMarc = codMarc;
     }
 
+    @Override
+    public String toString() {
+        return "producto{" +
+                "idProducto=" + idProducto +
+                ", Precio=" + Precio +
+                ", unidadDeVenta=" + unidadDeVenta +
+                ", dtosExtras='" + dtosExtras + '\'' +
+                ", codProd=" + codProd +
+                ", codMarc=" + codMarc +
+                '}';
+    }
 }

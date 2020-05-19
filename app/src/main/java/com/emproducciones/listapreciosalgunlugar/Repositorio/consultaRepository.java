@@ -1,7 +1,11 @@
 package com.emproducciones.listapreciosalgunlugar.Repositorio;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
+import com.emproducciones.listapreciosalgunlugar.model.precio;
+import com.emproducciones.listapreciosalgunlugar.model.proPreCloud;
 import com.emproducciones.listapreciosalgunlugar.model.producto;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,28 +16,44 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class consultaRepository {
     private FirebaseFirestore db;
     private producto pr;
+    private precio pre;
+    private proPreCloud producto;
 
     public consultaRepository (){
         db = FirebaseFirestore.getInstance();
+        producto = new proPreCloud();
+        pr = new producto();
     }
 
-    public producto obtenerProducto(int codMar, int codProdu){
+    public proPreCloud obtenerProducto(int codMar, int codProdu){
         db.collection(CONSTANTES.PRODUCTOS)
                 .whereEqualTo(CONSTANTES.CODMAR,codMar)
+                .whereEqualTo(CONSTANTES.CODPROD,codProdu)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            pr = document.toObject(producto.class);
+                            producto.setProducto(pr);
+                            obtenerPrecioProducto();
+                        }
+                    }else {
+                    }
+                });
+        return producto;
+    }
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                pr = document.toObject(producto.class);
-                            }
-                        } else {
-
+    private void obtenerPrecioProducto() {
+        db.collection(CONSTANTES.PRECIOS)
+                .whereEqualTo(CONSTANTES.IDPRECIO,producto.getProducto().getPrecio())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            pre = document.toObject(precio.class);
+                            producto.setPrecio(pre);
                         }
                     }
                 });
-        return pr;
     }
 }
