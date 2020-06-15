@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".busquedasActivity"
-            android:label="@string/title_activity_busquedas"></activity>
+            android:label="@string/title_activity_busquedas" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"

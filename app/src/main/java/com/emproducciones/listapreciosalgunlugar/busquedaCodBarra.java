@@ -1,23 +1,21 @@
 package com.emproducciones.listapreciosalgunlugar;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.*;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.emproducciones.listapreciosalgunlugar.model.proPreCloud;
-import com.emproducciones.listapreciosalgunlugar.model.producto;
+import android.view.*;
+import android.widget.*;
+import com.emproducciones.listapreciosalgunlugar.model.*;
 import com.emproducciones.listapreciosalgunlugar.viewModel.vMProducto;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.google.zxing.integration.android.*;
+
+import java.util.ArrayList;
 
 public class busquedaCodBarra extends Fragment {
 
@@ -25,14 +23,18 @@ public class busquedaCodBarra extends Fragment {
     private TextView txtDescripcion, txtPrecio;
     private Button btn;
     private String descri, precio;
-    private int codMar,codPro;
+    private String codMar,codPro;
     private vMProducto vMProducto;
-    private producto produ;
     private proPreCloud proPreCloud;
+    private ArrayList<proPreCloud> listaProductos;
+    private RecyclerView recycler_lista_escaneado;
+    private RecyclerView.LayoutManager layoutManager;
+    private BusquedaCodBarraViewModel viewModel;
 
     public busquedaCodBarra() {
         vMProducto = new vMProducto();
-
+        proPreCloud = new proPreCloud();
+        listaProductos = new ArrayList<>();
     }
 
     @Override
@@ -51,17 +53,18 @@ public class busquedaCodBarra extends Fragment {
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        enviarLista();
+    }
+
     private void initView(View view) {
         btn=view.findViewById(R.id.btnScan);
         txtDescripcion = view.findViewById(R.id.txtDescripcion);
         txtPrecio = view.findViewById(R.id.txtPrecio);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(BusquedaCodBarraViewModel.class);
-        // TODO: Use the ViewModel
+        recycler_lista_escaneado = view.findViewById(R.id.recycler_lista_escaneado);
     }
 
     // Get the results:
@@ -73,11 +76,6 @@ public class busquedaCodBarra extends Fragment {
                 txtDescripcion.setText("Nulo che");
             } else {
                 obtenerDtosDB(result.getContents());
-                if (produ!=null)
-                    System.out.println("PRODYCTO ACA: " + proPreCloud.getProducto().toString());
-                    txtDescripcion.setText(proPreCloud.getProducto().getDtosExtras());
-                    txtPrecio.setText("$ " + proPreCloud.getPrecio().getPrecio());
-
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -86,12 +84,70 @@ public class busquedaCodBarra extends Fragment {
 
     private void obtenerDtosDB(String contents) {
         procesarCB(contents);
-        proPreCloud = vMProducto.getProducto(codMar,codPro);
+        vMProducto.getProducto(codMar,codPro).observe(this, new Observer<producto>() {
+            @Override
+            public void onChanged(producto p) {
+                if (p!=null){
+                    proPreCloud.setProducto(p);
+                    txtDescripcion.setText(p.getDtosExtras());
+                    recuperarPrecio(p.getPrecio());
+                }else {
+                    txtDescripcion.setText("No No che");
+                    //TODO insertar cuadro de dialogo que no encontro producto
+                }
+            }
+        });
+    }
 
+    private void recuperarPrecio(int precio) {
+        vMProducto.getPrecioProducto(precio).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
+            @Override
+            public void onChanged(precio p) {
+                if(p!=null){
+                    proPreCloud.setPrecio(p);
+                    listaProductos.add(proPreCloud);
+                    txtPrecio.setText("$ " + retornarValorPorcentaje(p.getPrecio()));
+                    enviarLista();
+                }else {
+                    txtDescripcion.setText("No No che");
+                }
+            }
+        });
+    }
+
+    private void enviarLista() {
+        recycler_lista_escaneado.setLayoutManager(layoutManager);
+        viewModel = new BusquedaCodBarraViewModel(getActivity(),listaProductos);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recycler_lista_escaneado.setAdapter(viewModel);
+        recycler_lista_escaneado.setHasFixedSize(true);
     }
 
     private void procesarCB(String contents) {
-        codMar = Integer.parseInt(contents.substring(3,8));
-        codPro = Integer.parseInt(contents.substring(8,12));
+        codMar = contents.substring(3,8);
+        codPro = contents.substring(8,12);
+    }
+
+    private int retornarValorPorcentaje(double precio) {
+        if (MainActivity.porcentaje!=0){
+            double temp = (((precio * MainActivity.porcentaje)/100)+precio);
+            return redondearPrecio(temp);
+        }else return 0;
+    }
+
+    private int redondearPrecio(double precio) {
+
+        String str = String.valueOf(precio);
+        int intNumber = Integer.parseInt(str.substring(0, str.indexOf('.')));
+        long decNumberInt = Long.parseLong(str.substring(str.indexOf('.') + 1));
+        String temp = String.valueOf(decNumberInt).substring(0, 1);
+
+        if(Integer.parseInt(temp)<5) {
+            return intNumber;
+        }else {
+            return intNumber +1;
+        }
     }
 }
+
+

@@ -10,4 +10,5 @@
     <string name="escanear">ESCANEAR...</string>
     <string name="valor">VALOR</string>
     <string name="nueva_venta">NUEVA VENTA</string>
+    <string name="obteniendo_dtos">OBTENIENDO INFORMACION</string>
 </resources>

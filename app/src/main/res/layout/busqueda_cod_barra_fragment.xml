@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/btn_style"
             android:drawableRight="@drawable/barcode_reader_64px"
+            android:enabled="true"
             android:gravity="center"
             android:paddingRight="32dp"
             android:text="@string/text_btn_escanear"
@@ -78,6 +79,7 @@
             tools:layout_conversion_absoluteWidth="379dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_lista_escaneado"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </androidx.cardview.widget.CardView>

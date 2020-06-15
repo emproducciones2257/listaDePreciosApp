@@ -7,5 +7,5 @@ public class CONSTANTES {
     public static final String IDPRECIO = "idPrecioBDLocal";
     public static String PRODUCTOS ="productos";
     public static String PRECIOS ="precios";
-    public static String DTOSNECESARIO ="dtosNecesario";
+    public static String DTOSNECESARIO ="dtosNecesarios";
 }
