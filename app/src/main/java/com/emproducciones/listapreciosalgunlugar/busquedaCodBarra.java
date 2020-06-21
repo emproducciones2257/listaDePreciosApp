@@ -1,14 +1,12 @@
 package com.emproducciones.listapreciosalgunlugar;
 
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.*;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.*;
 import android.widget.*;
 import com.emproducciones.listapreciosalgunlugar.model.*;
@@ -22,7 +20,6 @@ public class busquedaCodBarra extends Fragment {
     private BusquedaCodBarraViewModel mViewModel;
     private TextView txtDescripcion, txtPrecio;
     private Button btn;
-    private String descri, precio;
     private String codMar,codPro;
     private vMProducto vMProducto;
     private proPreCloud proPreCloud;
@@ -56,7 +53,6 @@ public class busquedaCodBarra extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         enviarLista();
     }
 
@@ -87,7 +83,7 @@ public class busquedaCodBarra extends Fragment {
         vMProducto.getProducto(codMar,codPro).observe(this, new Observer<producto>() {
             @Override
             public void onChanged(producto p) {
-                if (p!=null){
+                if (!p.getDtosExtras().isEmpty()){
                     proPreCloud.setProducto(p);
                     txtDescripcion.setText(p.getDtosExtras());
                     recuperarPrecio(p.getPrecio());
