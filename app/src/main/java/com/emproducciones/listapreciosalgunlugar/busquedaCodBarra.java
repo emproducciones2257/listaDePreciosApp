@@ -94,7 +94,6 @@ public class busquedaCodBarra extends Fragment {
             }
         });
     }
-
     private void recuperarPrecio(int precio) {
         vMProducto.getPrecioProducto(precio).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
             @Override
@@ -102,8 +101,10 @@ public class busquedaCodBarra extends Fragment {
                 if(p!=null){
                     proPreCloud.setPrecio(p);
                     listaProductos.add(proPreCloud);
-                    txtPrecio.setText("$ " + retornarValorPorcentaje(p.getPrecio()));
-                    enviarLista();
+                    if(proPreCloud.getProducto().getUnidadDeVenta()!=0){
+                        txtPrecio.setText("$ " + retornarValorPorcentaje(p.getPrecio()/proPreCloud.getProducto().getUnidadDeVenta()));
+                        enviarLista();
+                    }
                 }else {
                     txtDescripcion.setText("No No che");
                 }
@@ -125,10 +126,8 @@ public class busquedaCodBarra extends Fragment {
     }
 
     private int retornarValorPorcentaje(double precio) {
-        if (MainActivity.porcentaje!=0){
-            double temp = (((precio * MainActivity.porcentaje)/100)+precio);
-            return redondearPrecio(temp);
-        }else return 0;
+        double temp = (((precio * MainActivity.porcentaje)/100)+precio);
+        return redondearPrecio(temp);
     }
 
     private int redondearPrecio(double precio) {
