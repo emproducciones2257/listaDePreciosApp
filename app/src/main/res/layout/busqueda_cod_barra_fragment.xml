@@ -88,7 +88,7 @@
         <TextView
             android:id="@+id/txtTotalVta"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="@string/valor"
             android:textColor="@color/primaryTextColor"
             android:textSize="24sp"

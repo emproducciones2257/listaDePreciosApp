@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/cantidadEscaneado"
@@ -20,7 +20,8 @@
     <TextView
         android:id="@+id/txtNombreEscaneado"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="3dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/cantidadEscaneado"
         app:layout_constraintEnd_toStartOf="@+id/txtPrecioEscaneado"
@@ -32,6 +33,7 @@
         android:id="@+id/txtPrecioEscaneado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/txtNombreEscaneado"
         app:layout_constraintEnd_toStartOf="@+id/imgSumar"
@@ -43,6 +45,7 @@
         android:id="@+id/imgSumar"
         android:layout_width="25dp"
         android:layout_height="30dp"
+        android:layout_marginStart="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/txtPrecioEscaneado"
         app:layout_constraintEnd_toStartOf="@+id/imgRestar"
         app:layout_constraintHorizontal_bias="0.5"
@@ -54,6 +57,8 @@
         android:id="@+id/imgRestar"
         android:layout_width="20dp"
         android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/imgSumar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

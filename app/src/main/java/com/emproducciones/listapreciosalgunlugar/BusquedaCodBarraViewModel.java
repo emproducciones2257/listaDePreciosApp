@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
 
     private Context ctx;
     private ArrayList<proPreCloud> dtosNube;
+
 
     public BusquedaCodBarraViewModel(Context ctx, ArrayList<proPreCloud> dtosNube) {
         this.ctx = ctx;
@@ -32,7 +34,9 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
 
     @Override
     public void onBindViewHolder(@NonNull BusquedaCodBarraViewModel.ViewHolder holder, int position) {
-        holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras());
+        holder.cantidadEscaneado.setText(""+position);
+        holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras().substring(0,20));
+        holder.txtPrecioEscaneado.setText("$ "+dtosNube.get(position).getPrecio().getPrecio());
     }
 
     @Override
@@ -45,10 +49,19 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView txtNombreEscaneado;
+        TextView cantidadEscaneado;
+        TextView txtPrecioEscaneado;
+        ImageView imgSumar,imgRestar;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtNombreEscaneado = itemView.findViewById(R.id.cantidadEscaneado);
+            txtNombreEscaneado = itemView.findViewById(R.id.txtNombreEscaneado);
+            cantidadEscaneado = itemView.findViewById(R.id.cantidadEscaneado);
+            txtPrecioEscaneado = itemView.findViewById(R.id.txtPrecioEscaneado);
+            imgSumar = itemView.findViewById(R.id.imgSumar);
+            imgRestar = itemView.findViewById(R.id.imgRestar);
+
         }
     }
 }
