@@ -16,7 +16,7 @@ public class vMProducto {
 
     public MutableLiveData<producto> getProducto(String codMar, String codProdu){return cRepo.obtenerProducto(codMar,codProdu);}
 
-    public MutableLiveData<precio> getPrecioProducto(int codPrecio){return cRepo.obtenerPrecioProducto(codPrecio);}
+    public MutableLiveData<precio> getPrecioProducto(producto producto, int porcentaje){return cRepo.obtenerPrecioProducto(producto,porcentaje);}
 
     public MutableLiveData<Integer> getPorcentaje() {return cRepo.obtenerPorcentaje();}
 }

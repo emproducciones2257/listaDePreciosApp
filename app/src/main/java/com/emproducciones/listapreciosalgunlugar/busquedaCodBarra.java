@@ -86,7 +86,7 @@ public class busquedaCodBarra extends Fragment {
                 if (!p.getDtosExtras().isEmpty()){
                     proPreCloud.setProducto(p);
                     txtDescripcion.setText(p.getDtosExtras());
-                    recuperarPrecio(p.getPrecio());
+                    recuperarPrecio(p);
                 }else {
                     txtDescripcion.setText("No No che");
                     //TODO insertar cuadro de dialogo que no encontro producto
@@ -94,17 +94,15 @@ public class busquedaCodBarra extends Fragment {
             }
         });
     }
-    private void recuperarPrecio(int precio) {
-        vMProducto.getPrecioProducto(precio).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
+    private void recuperarPrecio(producto producto) {
+        vMProducto.getPrecioProducto(producto, MainActivity.porcentaje).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
             @Override
             public void onChanged(precio p) {
                 if(p!=null){
                     proPreCloud.setPrecio(p);
                     listaProductos.add(proPreCloud);
-                    if(proPreCloud.getProducto().getUnidadDeVenta()!=0){
-                        txtPrecio.setText("$ " + retornarValorPorcentaje(p.getPrecio()/proPreCloud.getProducto().getUnidadDeVenta()));
-                        enviarLista();
-                    }
+                    txtPrecio.setText("$ " + p.getPrecio());
+                    enviarLista();
                 }else {
                     txtDescripcion.setText("No No che");
                 }
@@ -123,25 +121,6 @@ public class busquedaCodBarra extends Fragment {
     private void procesarCB(String contents) {
         codMar = contents.substring(3,8);
         codPro = contents.substring(8,12);
-    }
-
-    private int retornarValorPorcentaje(double precio) {
-        double temp = (((precio * MainActivity.porcentaje)/100)+precio);
-        return redondearPrecio(temp);
-    }
-
-    private int redondearPrecio(double precio) {
-
-        String str = String.valueOf(precio);
-        int intNumber = Integer.parseInt(str.substring(0, str.indexOf('.')));
-        long decNumberInt = Long.parseLong(str.substring(str.indexOf('.') + 1));
-        String temp = String.valueOf(decNumberInt).substring(0, 1);
-
-        if(Integer.parseInt(temp)<5) {
-            return intNumber;
-        }else {
-            return intNumber +1;
-        }
     }
 }
 

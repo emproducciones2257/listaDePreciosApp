@@ -48,7 +48,7 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtNombreEscaneado = itemView.findViewById(R.id.txtNombreEscaneado);
+            txtNombreEscaneado = itemView.findViewById(R.id.cantidadEscaneado);
         }
     }
 }
