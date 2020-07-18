@@ -58,6 +58,7 @@ public class consultaRepository {
                         if (!docu.isEmpty()){
                             for (QueryDocumentSnapshot document : docu) {
                                 pre = document.toObject(precio.class);
+                                System.out.println(pre.toString());
                             }
                         }
                         if (producto.getUnidadDeVenta()!=0){

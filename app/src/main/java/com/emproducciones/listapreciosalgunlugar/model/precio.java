@@ -3,7 +3,7 @@ package com.emproducciones.listapreciosalgunlugar.model;
 public class precio {
 
     private String idPrecio;
-    private int idPrecioBDLocal;
+    private String idPrecioBDLocal;
     private Double precio;
 
     public precio() {}
@@ -16,11 +16,11 @@ public class precio {
         this.idPrecio = idPrecio;
     }
 
-    public int getIdPrecioBDLocal() {
+    public String getIdPrecioBDLocal() {
         return idPrecioBDLocal;
     }
 
-    public void setIdPrecioBDLocal(int idPrecioBDLocal) {
+    public void setIdPrecioBDLocal(String idPrecioBDLocal) {
         this.idPrecioBDLocal = idPrecioBDLocal;
     }
 
@@ -30,5 +30,14 @@ public class precio {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    @Override
+    public String toString() {
+        return "precio{" +
+                "idPrecio='" + idPrecio + '\'' +
+                ", idPrecioBDLocal='" + idPrecioBDLocal + '\'' +
+                ", precio=" + precio +
+                '}';
     }
 }
