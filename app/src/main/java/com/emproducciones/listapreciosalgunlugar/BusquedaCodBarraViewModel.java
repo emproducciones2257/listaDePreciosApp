@@ -1,11 +1,8 @@
 package com.emproducciones.listapreciosalgunlugar;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.emproducciones.listapreciosalgunlugar.model.proPreCloud;

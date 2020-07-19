@@ -2,14 +2,11 @@ package com.emproducciones.listapreciosalgunlugar.Repositorio;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.emproducciones.listapreciosalgunlugar.MainActivity;
 import com.emproducciones.listapreciosalgunlugar.model.dtosNecesarios;
 import com.emproducciones.listapreciosalgunlugar.model.precio;
 import com.emproducciones.listapreciosalgunlugar.model.producto;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.*;
 
 public class consultaRepository {
     private FirebaseFirestore db;
@@ -24,10 +21,14 @@ public class consultaRepository {
         dtosGlobal = new dtosNecesarios();
     }
 
-    public MutableLiveData<producto> obtenerProducto(String codMar, String codProdu){
+    public MutableLiveData<producto> obtenerProducto(String codMar, String codProdu,String categoria){
         MutableLiveData<producto> listita = new MutableLiveData<>();
 
-        db.collection(CONSTANTES.PRODUCTOS)
+        if(categoria.equals("LIBRERIA")){ //LIBRERIA
+            categoria = CONSTANTES.PRODUCTOS;
+        }else categoria = CONSTANTES.PRODUCTOS_PERFU;
+
+        db.collection(categoria)
                 .whereEqualTo(CONSTANTES.CODMAR,codMar)
                 .whereEqualTo(CONSTANTES.CODPROD,codProdu)
                 .get()
@@ -46,10 +47,15 @@ public class consultaRepository {
         return listita;
     }
 
-    public MutableLiveData<precio> obtenerPrecioProducto(producto producto,int porcentaje){
+    public MutableLiveData<precio> obtenerPrecioProducto(producto producto,int porcentaje, String categoria){
+
         MutableLiveData<precio> listita = new MutableLiveData<>();
 
-        db.collection(CONSTANTES.PRECIOS)
+        if(categoria.equals("LIBRERIA")){ //LIBRERIA
+            categoria = CONSTANTES.PRODUCTOS;
+        }else categoria = CONSTANTES.PRODUCTOS_PERFU;
+
+        db.collection(categoria)
                 .whereEqualTo(CONSTANTES.IDPRECIO,producto.getPrecio())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

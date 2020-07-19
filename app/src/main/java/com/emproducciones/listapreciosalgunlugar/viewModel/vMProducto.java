@@ -14,9 +14,9 @@ public class vMProducto {
         cRepo = new consultaRepository();
     }
 
-    public MutableLiveData<producto> getProducto(String codMar, String codProdu){return cRepo.obtenerProducto(codMar,codProdu);}
+    public MutableLiveData<producto> getProducto(String codMar, String codProdu, String categoria){return cRepo.obtenerProducto(codMar,codProdu,categoria);}
 
-    public MutableLiveData<precio> getPrecioProducto(producto producto, int porcentaje){return cRepo.obtenerPrecioProducto(producto,porcentaje);}
+    public MutableLiveData<precio> getPrecioProducto(producto producto, int porcentaje, String categoria){return cRepo.obtenerPrecioProducto(producto,porcentaje,categoria);}
 
     public MutableLiveData<Integer> getPorcentaje() {return cRepo.obtenerPorcentaje();}
 }

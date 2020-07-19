@@ -15,7 +15,7 @@
 
         <Button
             android:id="@+id/btnScan"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_style"
             android:drawableRight="@drawable/barcode_reader_64px"
@@ -25,7 +25,8 @@
             android:text="@string/text_btn_escanear"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toTopOf="@+id/txtDescripcion"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPerfumeria"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="64dp"
@@ -41,7 +42,7 @@
             android:text="@string/escanear"
             android:textColor="@color/primaryTextColor"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/btnScan"
+            app:layout_constraintEnd_toEndOf="@+id/btnPerfumeria"
             app:layout_constraintStart_toStartOf="@+id/btnScan"
             app:layout_constraintTop_toBottomOf="@+id/btnScan"
             tools:layout_conversion_absoluteHeight="19dp"
@@ -118,6 +119,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9" />
+
+        <Button
+            android:id="@+id/btnPerfumeria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:layout_constraintBottom_toBottomOf="@+id/btnScan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnScan" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -2,11 +2,14 @@ package com.emproducciones.listapreciosalgunlugar;
 
 import androidx.lifecycle.Observer;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.*;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.emproducciones.listapreciosalgunlugar.model.*;
@@ -19,8 +22,8 @@ public class busquedaCodBarra extends Fragment {
 
     private BusquedaCodBarraViewModel mViewModel;
     private TextView txtDescripcion, txtPrecio;
-    private Button btn;
-    private String codMar,codPro;
+    private Button btn,btnPerfumeria;
+    private String codMar,codPro,categoria;
     private vMProducto vMProducto;
     private proPreCloud proPreCloud;
     private ArrayList<proPreCloud> listaProductos;
@@ -42,10 +45,20 @@ public class busquedaCodBarra extends Fragment {
 
         initView(view);
 
-        btn.setOnClickListener(view1 ->
-                IntentIntegrator.forSupportFragment(busquedaCodBarra.this)
+        btn.setOnClickListener(view1 -> {
+            categoria="LIBRERIA";
+        IntentIntegrator.forSupportFragment(busquedaCodBarra.this)
                 .setOrientationLocked(false)
-                .initiateScan());
+                .initiateScan();
+        });
+
+        btnPerfumeria.setOnClickListener(view12 -> {
+            categoria = "PERFUMERIA";
+            IntentIntegrator.forSupportFragment(busquedaCodBarra.this)
+                    .setOrientationLocked(false)
+                    .initiateScan();
+        });
+
         txtDescripcion.setText("ESCANEAR...");
         return view;
     }
@@ -57,6 +70,7 @@ public class busquedaCodBarra extends Fragment {
     }
 
     private void initView(View view) {
+        btnPerfumeria = view.findViewById(R.id.btnPerfumeria);
         btn=view.findViewById(R.id.btnScan);
         txtDescripcion = view.findViewById(R.id.txtDescripcion);
         txtPrecio = view.findViewById(R.id.txtPrecio);
@@ -67,6 +81,7 @@ public class busquedaCodBarra extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
         if(result != null) {
             if(result.getContents() == null) {
                 txtDescripcion.setText("Nulo che");
@@ -80,7 +95,7 @@ public class busquedaCodBarra extends Fragment {
 
     private void obtenerDtosDB(String contents) {
         procesarCB(contents);
-        vMProducto.getProducto(codMar,codPro).observe(this, new Observer<producto>() {
+        vMProducto.getProducto(codMar,codPro,categoria).observe(this, new Observer<producto>() {
             @Override
             public void onChanged(producto p) {
                 if (!p.getDtosExtras().isEmpty()){
@@ -95,7 +110,7 @@ public class busquedaCodBarra extends Fragment {
         });
     }
     private void recuperarPrecio(producto producto) {
-        vMProducto.getPrecioProducto(producto, MainActivity.porcentaje).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
+        vMProducto.getPrecioProducto(producto, MainActivity.porcentaje, categoria).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
             @Override
             public void onChanged(precio p) {
                 if(p!=null){
