@@ -1,6 +1,11 @@
 package com.emproducciones.listapreciosalgunlugar;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -98,13 +103,14 @@ public class busquedaCodBarra extends Fragment {
         vMProducto.getProducto(codMar,codPro,categoria).observe(this, new Observer<producto>() {
             @Override
             public void onChanged(producto p) {
-                if (!p.getDtosExtras().isEmpty()){
+                if (p!=null){
                     proPreCloud.setProducto(p);
                     txtDescripcion.setText(p.getDtosExtras());
                     recuperarPrecio(p);
-                }else {
-                    txtDescripcion.setText("No No che");
-                    //TODO insertar cuadro de dialogo que no encontro producto
+                }else{
+                    txtDescripcion.setText("");
+                    txtPrecio.setText("$");
+                    crearDialog();
                 }
             }
         });
@@ -136,6 +142,23 @@ public class busquedaCodBarra extends Fragment {
     private void procesarCB(String contents) {
         codMar = contents.substring(3,8);
         codPro = contents.substring(8,12);
+    }
+
+    public void crearDialog(){
+        androidx.appcompat.app.AlertDialog.Builder aviso = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+        aviso.setMessage("NO ESTA CHE")
+                .
+                .setPositiveButton("si", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // FIRE ZE MISSILES!
+            }
+            })
+            .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+            });
+        aviso.create().show();
     }
 }
 

@@ -14,7 +14,6 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
     private Context ctx;
     private ArrayList<proPreCloud> dtosNube;
 
-
     public BusquedaCodBarraViewModel(Context ctx, ArrayList<proPreCloud> dtosNube) {
         this.ctx = ctx;
         this.dtosNube = dtosNube;
@@ -32,7 +31,11 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
     @Override
     public void onBindViewHolder(@NonNull BusquedaCodBarraViewModel.ViewHolder holder, int position) {
         holder.cantidadEscaneado.setText(""+position);
-        holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras().substring(0,20));
+
+        if(dtosNube.get(position).getProducto().getDtosExtras().length()<21){
+            holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras());
+        }else holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras().substring(0,20));
+
         holder.txtPrecioEscaneado.setText("$ "+dtosNube.get(position).getPrecio().getPrecio());
     }
 
@@ -50,7 +53,6 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
         TextView txtPrecioEscaneado;
         ImageView imgSumar,imgRestar;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtNombreEscaneado = itemView.findViewById(R.id.txtNombreEscaneado);
@@ -58,7 +60,6 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
             txtPrecioEscaneado = itemView.findViewById(R.id.txtPrecioEscaneado);
             imgSumar = itemView.findViewById(R.id.imgSumar);
             imgRestar = itemView.findViewById(R.id.imgRestar);
-
         }
     }
 }

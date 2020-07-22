@@ -1,5 +1,7 @@
 package com.emproducciones.listapreciosalgunlugar.Repositorio;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.emproducciones.listapreciosalgunlugar.model.dtosNecesarios;
@@ -13,6 +15,7 @@ public class consultaRepository {
     private producto pr;
     private precio pre;
     private dtosNecesarios dtosGlobal;
+    private String catecate="";
 
     public consultaRepository (){
         db = FirebaseFirestore.getInstance();
@@ -25,10 +28,10 @@ public class consultaRepository {
         MutableLiveData<producto> listita = new MutableLiveData<>();
 
         if(categoria.equals("LIBRERIA")){ //LIBRERIA
-            categoria = CONSTANTES.PRODUCTOS;
-        }else categoria = CONSTANTES.PRODUCTOS_PERFU;
+            catecate = CONSTANTES.PRODUCTOS;
+        }else catecate = CONSTANTES.PRODUCTOS_PERFU;
 
-        db.collection(categoria)
+        db.collection(catecate)
                 .whereEqualTo(CONSTANTES.CODMAR,codMar)
                 .whereEqualTo(CONSTANTES.CODPROD,codProdu)
                 .get()
@@ -40,6 +43,7 @@ public class consultaRepository {
                                 pr = document.toObject(producto.class);
                             }
                         }
+                        else pr = null;
                         listita.setValue(pr);
                     }
                 });
@@ -51,11 +55,11 @@ public class consultaRepository {
 
         MutableLiveData<precio> listita = new MutableLiveData<>();
 
-        if(categoria.equals("LIBRERIA")){ //LIBRERIA
-            categoria = CONSTANTES.PRODUCTOS;
-        }else categoria = CONSTANTES.PRODUCTOS_PERFU;
+        if (categoria.equals("LIBRERIA")) { //LIBRERIA
+            catecate = CONSTANTES.PRECIOS;
+        } else catecate = CONSTANTES.PRECIOS_PERFU;
 
-        db.collection(categoria)
+        db.collection(catecate)
                 .whereEqualTo(CONSTANTES.IDPRECIO,producto.getPrecio())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -64,7 +68,6 @@ public class consultaRepository {
                         if (!docu.isEmpty()){
                             for (QueryDocumentSnapshot document : docu) {
                                 pre = document.toObject(precio.class);
-                                System.out.println(pre.toString());
                             }
                         }
                         if (producto.getUnidadDeVenta()!=0){

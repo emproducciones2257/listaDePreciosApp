@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 public class producto {
 
     private int idProducto;
-    private int Precio;
+    private String Precio;
     private int unidadDeVenta = 0;
     private String dtosExtras;
     private String codProd;
@@ -22,11 +22,11 @@ public class producto {
         this.idProducto = idProducto;
     }
 
-    public int getPrecio() {
+    public String getPrecio() {
         return Precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(String precio) {
         Precio = precio;
     }
 

@@ -11,4 +11,6 @@
     <string name="valor">VALOR</string>
     <string name="nueva_venta">NUEVA VENTA</string>
     <string name="obteniendo_dtos">OBTENIENDO INFORMACION</string>
+    <string name="text_btn_escanear_libreria">LIBRERIA</string>
+    <string name="text_btn_escanear_perfumeria">PERFUMERIA</string>
 </resources>

@@ -15,17 +15,15 @@
 
         <Button
             android:id="@+id/btnScan"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_style"
-            android:drawableRight="@drawable/barcode_reader_64px"
+            android:background="@color/secondaryDarkColor"
             android:enabled="true"
             android:gravity="center"
-            android:paddingRight="32dp"
-            android:text="@string/text_btn_escanear"
+            android:text="@string/text_btn_escanear_libreria"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toTopOf="@+id/txtDescripcion"
-            app:layout_constraintEnd_toStartOf="@+id/btnPerfumeria"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -122,13 +120,23 @@
 
         <Button
             android:id="@+id/btnPerfumeria"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Button"
+            android:background="@color/secondaryDarkColor"
+            android:gravity="center"
+            android:text="@string/text_btn_escanear_perfumeria"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintBottom_toBottomOf="@+id/btnScan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnScan" />
+            app:layout_constraintStart_toStartOf="@+id/guideline3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5013193" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
