@@ -46,6 +46,4 @@ public class busquedasActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
-
 }

@@ -23,6 +23,8 @@ import com.google.zxing.integration.android.*;
 
 import java.util.ArrayList;
 
+import static android.content.DialogInterface.*;
+
 public class busquedaCodBarra extends Fragment {
 
     private BusquedaCodBarraViewModel mViewModel;
@@ -146,18 +148,12 @@ public class busquedaCodBarra extends Fragment {
 
     public void crearDialog(){
         androidx.appcompat.app.AlertDialog.Builder aviso = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
-        aviso.setMessage("NO ESTA CHE")
-                .
-                .setPositiveButton("si", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // FIRE ZE MISSILES!
-            }
-            })
-            .setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-            });
+
+        LayoutInflater elInflado = requireActivity().getLayoutInflater();
+        aviso.setView(elInflado.inflate(R.layout.dialog_sin_resultado, null))
+                .setPositiveButton("ACEPTAR", (dialog, id) -> {
+
+                });
         aviso.create().show();
     }
 }
