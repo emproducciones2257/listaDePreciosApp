@@ -13,12 +13,11 @@
         app:lottie_loop="true" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtTextoSinResultado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_weight="1"
-        android:text="NO SE ENCUENTRA EL PRODUCTO"
         android:textStyle="bold" />
 
 

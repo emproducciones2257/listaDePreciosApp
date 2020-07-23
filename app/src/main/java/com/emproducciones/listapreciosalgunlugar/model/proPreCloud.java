@@ -24,4 +24,12 @@ public class proPreCloud {
     public void setProducto(producto producto) {
         this.producto = producto;
     }
+
+    @Override
+    public String toString() {
+        return "proPreCloud{" +
+                "precio=" + precio.toString() +
+                ", producto=" + producto.toString() +
+                '}';
+    }
 }

@@ -73,7 +73,8 @@ public class busquedaCodBarra extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        enviarLista();
+
+        enviarLista(listaProductos);
     }
 
     private void initView(View view) {
@@ -112,7 +113,7 @@ public class busquedaCodBarra extends Fragment {
                 }else{
                     txtDescripcion.setText("");
                     txtPrecio.setText("$");
-                    crearDialog();
+                    crearDialog("PRODUCTO");
                 }
             }
         });
@@ -125,18 +126,23 @@ public class busquedaCodBarra extends Fragment {
                     proPreCloud.setPrecio(p);
                     listaProductos.add(proPreCloud);
                     txtPrecio.setText("$ " + p.getPrecio());
-                    enviarLista();
-                }else {
-                    txtDescripcion.setText("No No che");
-                }
+                    enviarLista(listaProductos);
+                    mostrarAbajo(listaProductos);
+                }else crearDialog("PRECIO");
             }
         });
     }
 
-    private void enviarLista() {
+    private void mostrarAbajo(ArrayList<com.emproducciones.listapreciosalgunlugar.model.proPreCloud> listaProductos) {
+        for (proPreCloud e: listaProductos) {
+            System.out.println(e.toString());
+        }
+    }
+
+    private void enviarLista(ArrayList<proPreCloud> lis) {
         recycler_lista_escaneado.setLayoutManager(layoutManager);
-        viewModel = new BusquedaCodBarraViewModel(getActivity(),listaProductos);
         layoutManager = new LinearLayoutManager(getActivity());
+        viewModel = new BusquedaCodBarraViewModel(getActivity(),lis);
         recycler_lista_escaneado.setAdapter(viewModel);
         recycler_lista_escaneado.setHasFixedSize(true);
     }
@@ -146,13 +152,18 @@ public class busquedaCodBarra extends Fragment {
         codPro = contents.substring(8,12);
     }
 
-    public void crearDialog(){
+    public void crearDialog(String elPerdido){
+        TextView txtTextoSinResultado;
+        View view;
         androidx.appcompat.app.AlertDialog.Builder aviso = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
         LayoutInflater elInflado = requireActivity().getLayoutInflater();
-        aviso.setView(elInflado.inflate(R.layout.dialog_sin_resultado, null))
-                .setPositiveButton("ACEPTAR", (dialog, id) -> {
+        view = elInflado.inflate(R.layout.dialog_sin_resultado, null);
 
+        txtTextoSinResultado = view.findViewById(R.id.txtTextoSinResultado);
+        txtTextoSinResultado.setText("NO SE ENCUENTRA EL " + elPerdido);
+        aviso.setView(view)
+                .setPositiveButton("ACEPTAR", (dialog, id) -> {
                 });
         aviso.create().show();
     }
