@@ -30,13 +30,13 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
 
     @Override
     public void onBindViewHolder(@NonNull BusquedaCodBarraViewModel.ViewHolder holder, int position) {
-        holder.cantidadEscaneado.setText(""+position);
+        holder.cantidadEscaneado.setText(""+dtosNube.get(position).getCantidad());
 
         if(dtosNube.get(position).getProducto().getDtosExtras().length()<21){
             holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras());
         }else holder.txtNombreEscaneado.setText(dtosNube.get(position).getProducto().getDtosExtras().substring(0,20));
 
-        holder.txtPrecioEscaneado.setText("$ "+dtosNube.get(position).getPrecio().getPrecio());
+        holder.txtPrecioEscaneado.setText("$ "+ (dtosNube.get(position).getPrecio().getPrecio())*dtosNube.get(position).getCantidad());
     }
 
     @Override

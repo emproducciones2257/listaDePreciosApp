@@ -40,7 +40,6 @@ public class busquedaCodBarra extends Fragment {
 
     public busquedaCodBarra() {
         vMProducto = new vMProducto();
-        proPreCloud = new proPreCloud();
         listaProductos = new ArrayList<>();
     }
 
@@ -102,6 +101,8 @@ public class busquedaCodBarra extends Fragment {
     }
 
     private void obtenerDtosDB(String contents) {
+
+        proPreCloud = new proPreCloud();
         procesarCB(contents);
         vMProducto.getProducto(codMar,codPro,categoria).observe(this, new Observer<producto>() {
             @Override
@@ -124,22 +125,31 @@ public class busquedaCodBarra extends Fragment {
             public void onChanged(precio p) {
                 if(p!=null){
                     proPreCloud.setPrecio(p);
-                    listaProductos.add(proPreCloud);
+                    proPreCloud.setCantidad(1);
+                    agregarProductoAListaVentaActual(proPreCloud);
                     txtPrecio.setText("$ " + p.getPrecio());
                     enviarLista(listaProductos);
-                    mostrarAbajo(listaProductos);
                 }else crearDialog("PRECIO");
             }
         });
     }
 
-    private void mostrarAbajo(ArrayList<com.emproducciones.listapreciosalgunlugar.model.proPreCloud> listaProductos) {
-        for (proPreCloud e: listaProductos) {
-            System.out.println(e.toString());
-        }
+    private void agregarProductoAListaVentaActual(com.emproducciones.listapreciosalgunlugar.model.proPreCloud productoNuevo) {
+
+        boolean estado = false;
+        if(!listaProductos.isEmpty()){
+            for (proPreCloud e:listaProductos) {
+                if (e.getProducto().getDtosExtras().equals(productoNuevo.getProducto().getDtosExtras())){
+                    e.setCantidad(e.getCantidad()+1);
+                    estado=true;
+                }
+            }
+            if (!estado) listaProductos.add(productoNuevo);
+        }else listaProductos.add(productoNuevo);
     }
 
     private void enviarLista(ArrayList<proPreCloud> lis) {
+
         recycler_lista_escaneado.setLayoutManager(layoutManager);
         layoutManager = new LinearLayoutManager(getActivity());
         viewModel = new BusquedaCodBarraViewModel(getActivity(),lis);
