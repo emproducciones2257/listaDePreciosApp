@@ -28,9 +28,10 @@ import static android.content.DialogInterface.*;
 public class busquedaCodBarra extends Fragment {
 
     private BusquedaCodBarraViewModel mViewModel;
-    private TextView txtDescripcion, txtPrecio;
+    private TextView txtDescripcion, txtPrecio,txtTotalVta;
     private Button btn,btnPerfumeria;
     private String codMar,codPro,categoria;
+    private int totalVta;
     private vMProducto vMProducto;
     private proPreCloud proPreCloud;
     private ArrayList<proPreCloud> listaProductos;
@@ -81,7 +82,9 @@ public class busquedaCodBarra extends Fragment {
         btn=view.findViewById(R.id.btnScan);
         txtDescripcion = view.findViewById(R.id.txtDescripcion);
         txtPrecio = view.findViewById(R.id.txtPrecio);
+        txtTotalVta = view.findViewById(R.id.txtTotalVta);
         recycler_lista_escaneado = view.findViewById(R.id.recycler_lista_escaneado);
+        totalVta = 0;
     }
 
     // Get the results:
@@ -128,6 +131,8 @@ public class busquedaCodBarra extends Fragment {
                     proPreCloud.setCantidad(1);
                     agregarProductoAListaVentaActual(proPreCloud);
                     txtPrecio.setText("$ " + p.getPrecio());
+                    totalVta += p.getPrecio();
+                    txtTotalVta.setText("$" + totalVta);
                     enviarLista(listaProductos);
                 }else crearDialog("PRECIO");
             }
