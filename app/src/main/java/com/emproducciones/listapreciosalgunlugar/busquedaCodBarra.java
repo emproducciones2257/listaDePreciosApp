@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import static android.content.DialogInterface.*;
 
-public class busquedaCodBarra extends Fragment {
+public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
 
     private BusquedaCodBarraViewModel mViewModel;
     private TextView txtDescripcion, txtPrecio,txtTotalVta;
@@ -51,6 +51,8 @@ public class busquedaCodBarra extends Fragment {
         View view = inflater.inflate(R.layout.busqueda_cod_barra_fragment, container, false);
 
         initView(view);
+
+
 
         btn.setOnClickListener(view1 -> {
             categoria="LIBRERIA";
@@ -154,10 +156,9 @@ public class busquedaCodBarra extends Fragment {
     }
 
     private void enviarLista(ArrayList<proPreCloud> lis) {
-
         recycler_lista_escaneado.setLayoutManager(layoutManager);
         layoutManager = new LinearLayoutManager(getActivity());
-        viewModel = new BusquedaCodBarraViewModel(getActivity(),lis);
+        viewModel = new BusquedaCodBarraViewModel(getActivity(),lis,this);
         recycler_lista_escaneado.setAdapter(viewModel);
         recycler_lista_escaneado.setHasFixedSize(true);
     }
@@ -181,6 +182,27 @@ public class busquedaCodBarra extends Fragment {
                 .setPositiveButton("ACEPTAR", (dialog, id) -> {
                 });
         aviso.create().show();
+    }
+
+    public void crearDialogItemClick(String txtNombreEscaneado){
+        TextView txtTextoSinResultado;
+        View view;
+        androidx.appcompat.app.AlertDialog.Builder aviso = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+
+        LayoutInflater elInflado = requireActivity().getLayoutInflater();
+        view = elInflado.inflate(R.layout.dialog_sin_resultado, null);
+
+        txtTextoSinResultado = view.findViewById(R.id.txtTextoSinResultado);
+        txtTextoSinResultado.setText(txtNombreEscaneado);
+        aviso.setView(view)
+                .setPositiveButton("ACEPTAR", (dialog, id) -> {
+                });
+        aviso.create().show();
+    }
+
+    @Override
+    public void eventoItemClick(String txtNombreEscaneado) {
+        crearDialogItemClick(txtNombreEscaneado);
     }
 }
 
