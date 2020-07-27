@@ -190,7 +190,7 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
         androidx.appcompat.app.AlertDialog.Builder aviso = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
         LayoutInflater elInflado = requireActivity().getLayoutInflater();
-        view = elInflado.inflate(R.layout.dialog_sin_resultado, null);
+        view = elInflado.inflate(R.layout.dialog_click_item, null);
 
         txtTextoSinResultado = view.findViewById(R.id.txtTextoSinResultado);
         txtTextoSinResultado.setText(txtNombreEscaneado);
