@@ -13,4 +13,8 @@
     <string name="obteniendo_dtos">OBTENIENDO INFORMACION</string>
     <string name="text_btn_escanear_libreria">LIBRERIA</string>
     <string name="text_btn_escanear_perfumeria">PERFUMERIA</string>
+    <string name="quitar_de_lista">borrar producto</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="txtunitario">Precio Unitario</string>
+    <string name="totaltodo">Total</string>
 </resources>

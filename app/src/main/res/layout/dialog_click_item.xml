@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
     android:padding="16dp">
 
     <TextView
@@ -11,6 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@color/primaryTextColor"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,9 +24,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="TextView"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/imgRestar"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imgSumar"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreProducto" />
+
+    <TextView
+        android:id="@+id/txtTituloCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cantidad"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txtCantidad"
+        app:layout_constraintEnd_toEndOf="@+id/txtNombreProducto"
+        app:layout_constraintStart_toStartOf="@+id/txtNombreProducto"
         app:layout_constraintTop_toBottomOf="@+id/txtNombreProducto" />
 
     <ImageButton
@@ -32,6 +49,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
+        android:background="@color/primaryColor"
         app:layout_constraintEnd_toStartOf="@+id/txtCantidad"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,9 +61,58 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
+        android:background="@color/primaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txtCantidad"
         app:layout_constraintTop_toBottomOf="@+id/txtNombreProducto"
         app:srcCompat="@drawable/minus_30px" />
+
+    <TextView
+        android:id="@+id/txtPrecioUnidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txtTituloUnitario"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toStartOf="@+id/txtTituloUnitario"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloUnitario" />
+
+    <TextView
+        android:id="@+id/txtTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/txtTituloTotal"
+        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintStart_toStartOf="@+id/txtTituloTotal"
+        app:layout_constraintTop_toBottomOf="@+id/txtTituloTotal" />
+
+    <TextView
+        android:id="@+id/txtTituloUnitario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/txtunitario"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintEnd_toEndOf="@+id/imgSumar"
+        app:layout_constraintStart_toStartOf="@+id/imgSumar"
+        app:layout_constraintTop_toBottomOf="@+id/imgSumar" />
+
+    <TextView
+        android:id="@+id/txtTituloTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/totaltodo"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintEnd_toEndOf="@+id/imgRestar"
+        app:layout_constraintStart_toStartOf="@+id/imgRestar"
+        app:layout_constraintTop_toBottomOf="@+id/imgRestar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

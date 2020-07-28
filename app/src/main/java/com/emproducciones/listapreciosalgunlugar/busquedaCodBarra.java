@@ -31,7 +31,7 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
     private TextView txtDescripcion, txtPrecio,txtTotalVta;
     private Button btn,btnPerfumeria;
     private String codMar,codPro,categoria;
-    private int totalVta;
+    private int totalVta, indiceSeleccionado;
     private vMProducto vMProducto;
     private proPreCloud proPreCloud;
     private ArrayList<proPreCloud> listaProductos;
@@ -185,19 +185,72 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
     }
 
     public void crearDialogItemClick(String txtNombreEscaneado){
-        TextView txtTextoSinResultado;
+        TextView txtNombreProducto,txtCantidad,txtPrecioUnidad,txtTotal;
+        ImageButton imgSumar,imgRestar;
         View view;
+        proPreCloud prodSeleccionado = recuperarProductoSeleccionado(txtNombreEscaneado);
+
         androidx.appcompat.app.AlertDialog.Builder aviso = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
 
         LayoutInflater elInflado = requireActivity().getLayoutInflater();
         view = elInflado.inflate(R.layout.dialog_click_item, null);
 
-        txtTextoSinResultado = view.findViewById(R.id.txtTextoSinResultado);
-        txtTextoSinResultado.setText(txtNombreEscaneado);
+        txtNombreProducto = view.findViewById(R.id.txtNombreProducto);
+        txtCantidad = view.findViewById(R.id.txtCantidad);
+        txtPrecioUnidad = view.findViewById(R.id.txtPrecioUnidad);
+        txtTotal = view.findViewById(R.id.txtTotal);
+        imgSumar = view.findViewById(R.id.imgSumar);
+        imgRestar = view.findViewById(R.id.imgRestar);
+
+        txtNombreProducto.setText(prodSeleccionado.getProducto().getDtosExtras());
+        txtCantidad.setText(prodSeleccionado.getCantidad()+"");
+        txtPrecioUnidad.setText("$ " + prodSeleccionado.getPrecio().getPrecio());
+        txtTotal.setText("$ " + prodSeleccionado.getCantidad()*prodSeleccionado.getPrecio().getPrecio());
+
+        imgSumar.setOnClickListener(view1 -> {
+            listaProductos.get(indiceSeleccionado).setCantidad((listaProductos.get(indiceSeleccionado).getCantidad()+1));
+            totalVta += listaProductos.get(indiceSeleccionado).getPrecio().getPrecio();
+            txtCantidad.setText(+listaProductos.get(indiceSeleccionado).getCantidad()+"");
+            txtTotal.setText("$ " + listaProductos.get(indiceSeleccionado).getCantidad()*listaProductos.get(indiceSeleccionado).getPrecio().getPrecio());
+        });
+
+        imgRestar.setOnClickListener(view12 -> {
+            if(listaProductos.get(indiceSeleccionado).getCantidad()>0){
+                listaProductos.get(indiceSeleccionado).setCantidad((listaProductos.get(indiceSeleccionado).getCantidad()-1));
+                txtTotal.setText("$ " + listaProductos.get(indiceSeleccionado).getCantidad()*listaProductos.get(indiceSeleccionado).getPrecio().getPrecio());
+            }
+            txtCantidad.setText(+listaProductos.get(indiceSeleccionado).getCantidad()+"");
+            if(totalVta-listaProductos.get(indiceSeleccionado).getPrecio().getPrecio()>=0) totalVta -= listaProductos.get(indiceSeleccionado).getPrecio().getPrecio();
+
+            txtTotal.setText("$ " + listaProductos.get(indiceSeleccionado).getCantidad()*listaProductos.get(indiceSeleccionado).getPrecio().getPrecio());
+        });
+
         aviso.setView(view)
                 .setPositiveButton("ACEPTAR", (dialog, id) -> {
+                    enviarLista(listaProductos);
+                    txtTotalVta.setText("$" + totalVta);
                 });
+
+        aviso.setNegativeButton("ELIMINAR PRODUCTO", (dialogInterface, i) -> {
+            totalVta -= listaProductos.get(indiceSeleccionado).getCantidad()*listaProductos.get(indiceSeleccionado).getPrecio().getPrecio();
+            listaProductos.remove(indiceSeleccionado);
+            enviarLista(listaProductos);
+            txtTotalVta.setText("$" + totalVta);
+        });
+
         aviso.create().show();
+    }
+
+    private proPreCloud recuperarProductoSeleccionado(String txtNombreEscaneado) {
+        proPreCloud prodSeleccionado = new proPreCloud();
+        for (int i = 0; i<listaProductos.size();i++){
+            if (listaProductos.get(i).getProducto().getDtosExtras().equals(txtNombreEscaneado)){
+                prodSeleccionado.setCantidad(listaProductos.get(i).getCantidad());
+                prodSeleccionado.setPrecio(listaProductos.get(i).getPrecio());
+                prodSeleccionado.setProducto(listaProductos.get(i).getProducto());
+                indiceSeleccionado=i;
+            }
+        }return prodSeleccionado;
     }
 
     @Override
