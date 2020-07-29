@@ -36,34 +36,8 @@
         android:layout_marginStart="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/txtNombreEscaneado"
-        app:layout_constraintEnd_toStartOf="@+id/imgSumar"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtNombreEscaneado"
         app:layout_constraintTop_toTopOf="@+id/txtNombreEscaneado" />
-
-    <ImageView
-        android:id="@+id/imgSumar"
-        android:layout_width="25dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtPrecioEscaneado"
-        app:layout_constraintEnd_toStartOf="@+id/imgRestar"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/txtPrecioEscaneado"
-        app:layout_constraintTop_toTopOf="@+id/txtPrecioEscaneado"
-        app:srcCompat="@drawable/add_48px" />
-
-    <ImageView
-        android:id="@+id/imgRestar"
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgSumar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imgSumar"
-        app:layout_constraintTop_toTopOf="@+id/imgSumar"
-        app:srcCompat="@drawable/minus_30px" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

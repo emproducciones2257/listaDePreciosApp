@@ -56,17 +56,12 @@ public class BusquedaCodBarraViewModel extends RecyclerView.Adapter<BusquedaCodB
         TextView txtNombreEscaneado;
         TextView cantidadEscaneado;
         TextView txtPrecioEscaneado;
-        ImageView imgSumar,imgRestar;
 
         public ViewHolder(@NonNull View itemView) {
-
             super(itemView);
-
             txtNombreEscaneado = itemView.findViewById(R.id.txtNombreEscaneado);
             cantidadEscaneado = itemView.findViewById(R.id.cantidadEscaneado);
             txtPrecioEscaneado = itemView.findViewById(R.id.txtPrecioEscaneado);
-            imgSumar = itemView.findViewById(R.id.imgSumar);
-            imgRestar = itemView.findViewById(R.id.imgRestar);
         }
     }
 }
