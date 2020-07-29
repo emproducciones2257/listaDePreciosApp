@@ -125,19 +125,16 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
         });
     }
     private void recuperarPrecio(producto producto) {
-        vMProducto.getPrecioProducto(producto, MainActivity.porcentaje, categoria).observe(this, new Observer<com.emproducciones.listapreciosalgunlugar.model.precio>() {
-            @Override
-            public void onChanged(precio p) {
-                if(p!=null){
-                    proPreCloud.setPrecio(p);
-                    proPreCloud.setCantidad(1);
-                    agregarProductoAListaVentaActual(proPreCloud);
-                    txtPrecio.setText("$ " + p.getPrecio());
-                    totalVta += p.getPrecio();
-                    txtTotalVta.setText("$" + totalVta);
-                    enviarLista(listaProductos);
-                }else crearDialog("PRECIO");
-            }
+        vMProducto.getPrecioProducto(producto, MainActivity.porcentaje, categoria).observe(this, p -> {
+            if(p!=null){
+                proPreCloud.setPrecio(p);
+                proPreCloud.setCantidad(1);
+                agregarProductoAListaVentaActual(proPreCloud);
+                txtPrecio.setText("$ " + p.getPrecio());
+                totalVta += p.getPrecio();
+                txtTotalVta.setText("$" + totalVta);
+                enviarLista(listaProductos);
+            }else crearDialog("PRECIO");
         });
     }
 
