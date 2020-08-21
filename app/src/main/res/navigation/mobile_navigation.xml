@@ -3,18 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/inicioFragment">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.emproducciones.listapreciosalgunlugar.busquedaCodBarra"
         android:label="@string/title_home"
-        tools:layout="@layout/busqueda_cod_barra_fragment" />
+        tools:layout="@layout/busqueda_cod_barra_fragment" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.emproducciones.listapreciosalgunlugar.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.emproducciones.listapreciosalgunlugar.inicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" >
+        <action
+            android:id="@+id/action_inicioFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 </navigation>
