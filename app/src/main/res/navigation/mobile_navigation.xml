@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.emproducciones.listapreciosalgunlugar.busquedaCodBarra"
+        android:name="com.emproducciones.listapreciosalgunlugar.ui.dashboard.UIBusquedaEscaneo.UI.busquedaCodBarra"
         android:label="@string/title_home"
         tools:layout="@layout/busqueda_cod_barra_fragment" >
         <action
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/inicioFragment"
-        android:name="com.emproducciones.listapreciosalgunlugar.inicioFragment"
+        android:name="com.emproducciones.listapreciosalgunlugar.ui.dashboard.inicioFragment"
         android:label="fragment_inicio"
         tools:layout="@layout/fragment_inicio" >
         <action

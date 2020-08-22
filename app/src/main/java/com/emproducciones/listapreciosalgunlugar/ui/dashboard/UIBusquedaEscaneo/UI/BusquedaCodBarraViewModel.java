@@ -1,11 +1,13 @@
-package com.emproducciones.listapreciosalgunlugar;
+package com.emproducciones.listapreciosalgunlugar.ui.dashboard.UIBusquedaEscaneo.UI;
 
 import android.content.Context;
 import android.view.*;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.emproducciones.listapreciosalgunlugar.model.proPreCloud;
+import com.emproducciones.listapreciosalgunlugar.R;
+import com.emproducciones.listapreciosalgunlugar.ui.dashboard.UIBusquedaEscaneo.Evtn.evtnClickItemLista;
+import com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.proPreCloud;
 import java.util.ArrayList;
 
 

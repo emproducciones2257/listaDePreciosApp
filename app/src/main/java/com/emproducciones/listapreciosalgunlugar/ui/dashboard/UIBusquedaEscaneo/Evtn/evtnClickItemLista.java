@@ -1,6 +1,4 @@
-package com.emproducciones.listapreciosalgunlugar;
-
-import android.view.View;
+package com.emproducciones.listapreciosalgunlugar.ui.dashboard.UIBusquedaEscaneo.Evtn;
 
 public interface evtnClickItemLista  {
 

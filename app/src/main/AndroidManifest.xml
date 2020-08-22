@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".busquedasActivity"
+            android:name=".ui.dashboard.busquedasActivity"
             android:label="@string/title_activity_busquedas" />
         <activity android:name=".MainActivity">
             <intent-filter>

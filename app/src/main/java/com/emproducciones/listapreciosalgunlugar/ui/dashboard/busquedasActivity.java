@@ -1,14 +1,12 @@
-package com.emproducciones.listapreciosalgunlugar;
+package com.emproducciones.listapreciosalgunlugar.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
-
+import com.emproducciones.listapreciosalgunlugar.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;

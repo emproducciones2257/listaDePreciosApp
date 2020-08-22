@@ -1,4 +1,4 @@
-package com.emproducciones.listapreciosalgunlugar.model;
+package com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases;
 
 public class precio {
 

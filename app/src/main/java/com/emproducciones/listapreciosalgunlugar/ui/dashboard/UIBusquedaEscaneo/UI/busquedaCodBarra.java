@@ -1,33 +1,24 @@
-package com.emproducciones.listapreciosalgunlugar;
+package com.emproducciones.listapreciosalgunlugar.ui.dashboard.UIBusquedaEscaneo.UI;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.Observer;
-
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.*;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
-import com.emproducciones.listapreciosalgunlugar.model.*;
+import com.emproducciones.listapreciosalgunlugar.R;
+import com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.proPreCloud;
+import com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.producto;
+import com.emproducciones.listapreciosalgunlugar.ui.dashboard.UIBusquedaEscaneo.Evtn.evtnClickItemLista;
 import com.emproducciones.listapreciosalgunlugar.viewModel.vMProducto;
 import com.google.zxing.integration.android.*;
-
 import java.util.ArrayList;
 
-import static android.content.DialogInterface.*;
+public class busquedaCodBarra extends Fragment implements evtnClickItemLista {
 
-public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
-
-    private BusquedaCodBarraViewModel mViewModel;
     private TextView txtDescripcion, txtPrecio,txtTotalVta;
     private Button btn,btnPerfumeria;
     private String codMar,codPro,categoria;
@@ -51,8 +42,6 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
         View view = inflater.inflate(R.layout.busqueda_cod_barra_fragment, container, false);
 
         initView(view);
-
-
 
         btn.setOnClickListener(view1 -> {
             categoria="LIBRERIA";
@@ -125,7 +114,7 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
         });
     }
     private void recuperarPrecio(producto producto) {
-        vMProducto.getPrecioProducto(producto, MainActivity.porcentaje, categoria).observe(this, p -> {
+        vMProducto.getPrecioProducto(producto, vMProducto.porcentaje, categoria).observe(this, p -> {
             if(p!=null){
                 proPreCloud.setPrecio(p);
                 proPreCloud.setCantidad(1);
@@ -138,7 +127,7 @@ public class busquedaCodBarra extends Fragment implements evtnClickItemLista{
         });
     }
 
-    private void agregarProductoAListaVentaActual(com.emproducciones.listapreciosalgunlugar.model.proPreCloud productoNuevo) {
+    private void agregarProductoAListaVentaActual(com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.proPreCloud productoNuevo) {
 
         boolean estado = false;
         if(!listaProductos.isEmpty()){

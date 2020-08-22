@@ -1,8 +1,9 @@
-package com.emproducciones.listapreciosalgunlugar.model;
+package com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases;
+
 
 public class proPreCloud {
-    private precio precio;
-    private producto producto;
+    private com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.precio precio;
+    private com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.producto producto;
     private int cantidad;
 
     public proPreCloud() {

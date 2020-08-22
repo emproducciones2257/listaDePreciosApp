@@ -1,12 +1,10 @@
 package com.emproducciones.listapreciosalgunlugar.Repositorio;
 
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
-
-import com.emproducciones.listapreciosalgunlugar.model.dtosNecesarios;
-import com.emproducciones.listapreciosalgunlugar.model.precio;
-import com.emproducciones.listapreciosalgunlugar.model.producto;
+import com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.dtosNecesarios;
+import com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.precio;
+import com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases.producto;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.*;
 

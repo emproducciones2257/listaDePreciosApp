@@ -1,6 +1,4 @@
-package com.emproducciones.listapreciosalgunlugar.model;
-
-import androidx.annotation.NonNull;
+package com.emproducciones.listapreciosalgunlugar.Repositorio.ModeloClases;
 
 public class producto {
 
